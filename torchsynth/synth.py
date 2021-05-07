@@ -149,7 +149,10 @@ class AbstractSynth(LightningModule):
         return OrderedDict(parameters)
 
     def set_parameters(
-        self, params: Dict[Tuple[str, str], T], freeze: Optional[bool] = False
+        self,
+        params: Dict[Tuple[str, str], T],
+        freeze: Optional[bool] = False,
+        range0to1=False,
     ):
         """
         Set various :class:`~torchsynth.parameter.ModuleParameter` for this synth.
@@ -160,7 +163,10 @@ class AbstractSynth(LightningModule):
         """
         for (module_name, param_name), value in params.items():
             module = getattr(self, module_name)
-            module.set_parameter(param_name, value.to(self.device))
+            if range0to1:
+                module.set_parameter_0to1(param_name, value.to(self.device))
+            else:
+                module.set_parameter(param_name, value.to(self.device))
             # Freeze this parameter at this value now if freeze is True
             if freeze:
                 module.get_parameter(param_name).frozen = True

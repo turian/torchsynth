@@ -4,3 +4,4 @@ docs/source/_static/images/Voice-diagram.svg filter=lfs diff=lfs merge=lfs -text
 docs/source/_static/images/gpu-mem-profiles.svg filter=lfs diff=lfs merge=lfs -text
 docs/source/_static/images/gpu-speed-profiles.svg filter=lfs diff=lfs merge=lfs -text
 docs/source/_static/images/torchsynth-logo-and-logotype.svg filter=lfs diff=lfs merge=lfs -text
+examples/909-snare-4sec.ogg filter=lfs diff=lfs merge=lfs -text

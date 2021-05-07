@@ -42,11 +42,6 @@ from torchsynth.synth import Voice
 gpus = torch.cuda.device_count()
 print("Usings %d gpus" % gpus)
 
-# Note this is the batch size for our synth!
-# i.e. this many synth sounds are generated at once
-# Not the batch size of the datasets
-BATCH_SIZE = 256
-
 import multiprocessing
 
 ncores = multiprocessing.cpu_count()
@@ -82,8 +77,7 @@ class TorchSynthCallback(pl.Callback):
         # _ = torch.stack([pl_module(i) for i in batch])
 
 
-synth1B = batch_idx_dataset(1024 * 1024 * 1024 // BATCH_SIZE)
-
+synth1B = batch_idx_dataset(1000000000 // synthconfig.batch_size)
 test_dataloader = torch.utils.data.DataLoader(synth1B, num_workers=0, batch_size=1)
 
 voice = Voice()
